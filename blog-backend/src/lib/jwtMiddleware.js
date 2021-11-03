@@ -5,7 +5,15 @@ const jwtMiddleware = (ctx, next) => {
   if (!token) return next();
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    ctx.state.user = {
+      _id: decoded._id,
+      username: decoded.username,
+    };
+    console.log(decoded);
+    return next();
   } catch (e) {
     return next();
   }
 };
+
+export default jwtMiddleware;
