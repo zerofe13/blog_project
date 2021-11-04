@@ -1,5 +1,4 @@
 import Joi from 'joi';
-import { set } from 'mongoose';
 import User from '../../models/user';
 
 export const register = async (ctx) => {
