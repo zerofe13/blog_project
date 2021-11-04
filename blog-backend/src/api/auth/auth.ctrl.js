@@ -1,4 +1,5 @@
 import Joi from 'joi';
+import { set } from 'mongoose';
 import User from '../../models/user';
 
 export const register = async (ctx) => {
@@ -73,4 +74,7 @@ export const check = async (ctx) => {
   ctx.body = user;
 };
 
-export const logout = async (ctx) => {};
+export const logout = async (ctx) => {
+  ctx.cookies.set('access_token');
+  ctx.status = 204;
+};
