@@ -29,7 +29,7 @@ const auth = handleActions(
   {
     [CHANG_FIELD]: (state, { payload: { form, key, value } }) =>
       produce(state, (draft) => {
-        draft[form][key] = value; //immer state.register(form).username(key) = value
+        draft[form][key] = value; //immer state.register(form).password(key) = value
       }),
     [INITIALIZE_FORM]: (state, { payload: form }) => ({
       ...state,
