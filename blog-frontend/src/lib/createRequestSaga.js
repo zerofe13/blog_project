@@ -1,6 +1,11 @@
 import { call, put } from 'redux-saga/effects';
-import { push_uniq } from '../../node_modules/terser/tools/terser';
 import { startLoading, finishLoading } from '../modules/loading';
+
+export const createRequestActoinTypes = (type) => {
+  const SUCCESS = `${type}_SUCCESS`;
+  const FAILURE = `${type}_FAILURE`;
+  return [type, SUCCESS, FAILURE];
+};
 
 export default function createRequestSaga(type, request) {
   const SUCCESS = `${type}_SUCCESS`;
@@ -15,7 +20,7 @@ export default function createRequestSaga(type, request) {
         payload: response.data,
       });
     } catch (e) {
-      yield push_uniq({
+      yield put({
         type: FAILURE,
         payload: e,
         error: true,
