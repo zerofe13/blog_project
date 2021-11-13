@@ -2,13 +2,15 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeField, initializeForm, register } from '../modules/auth';
 import AuthForm from '../components/auth/AuthForm';
+import { check } from '../modules/user';
 
 const RegisterForm = () => {
   const dispatch = useDispatch();
-  const { form, auth, authError } = useSelector(({ auth }) => ({
+  const { form, auth, authError, user } = useSelector(({ auth, user }) => ({
     form: auth.register,
     auth: auth.auth,
     authError: auth.authError,
+    user: user.user,
   }));
 
   const onChange = (e) => {
@@ -23,7 +25,6 @@ const RegisterForm = () => {
   };
 
   const onSubmit = (e) => {
-    console.log('onSubmit');
     e.preventDefault();
     const { username, password, passwordConfirm } = form;
     if (password !== passwordConfirm) {
@@ -45,8 +46,15 @@ const RegisterForm = () => {
     if (auth) {
       console.log('회원가입 성공');
       console.log(auth);
+      dispatch(check());
     }
-  }, [auth, authError]);
+  }, [auth, authError, dispatch]);
+  useEffect(() => {
+    if (user) {
+      console.log('check API 성공');
+      console.log(user);
+    }
+  }, [user]);
   return (
     <AuthForm
       type="register"
