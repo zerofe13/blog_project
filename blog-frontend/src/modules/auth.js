@@ -2,21 +2,21 @@ import { createAction, handleActions } from 'redux-actions';
 import produce from 'immer';
 import { takeLatest } from 'redux-saga/effects';
 import createRequestSaga, {
-  createRequestActoinTypes,
+  createRequestActionTypes,
 } from '../lib/createRequestSaga';
 import * as authAPI from '../lib/api/auth';
 //액션타입
-const CHANG_FIELD = 'auth/CHANG_FIELD';
+const CHANGE_FIELD = 'auth/CHANGE_FIELD';
 const INITIALIZE_FORM = 'auth/INITIALIZE_FORM';
 
 const [REGISTER, REGISTER_SUCCESS, REGISTER_FAILURE] =
-  createRequestActoinTypes('auth/REGISTER');
+  createRequestActionTypes('auth/REGISTER');
 
 const [LOGIN, LOGIN_SUCCESS, LOGIN_FAILURE] =
-  createRequestActoinTypes('auth/LOGIN');
+  createRequestActionTypes('auth/LOGIN');
 
 export const changeField = createAction(
-  CHANG_FIELD,
+  CHANGE_FIELD,
   ({ form, key, value }) => ({
     form, //login,register
     key,
@@ -37,7 +37,7 @@ const registerSaga = createRequestSaga(REGISTER, authAPI.register);
 const loginSaga = createRequestSaga(LOGIN, authAPI.login);
 export function* authSaga() {
   yield takeLatest(REGISTER, registerSaga);
-  yield takeLatest(LOGIN, loginSaga);
+  yield takeLatest(LOGIN, loginSaga); //LOGIN 액션 중지 , loginsaga 함수실행 SUCCESS_LOGIN dispatch
 }
 
 const initialState = {
@@ -56,7 +56,7 @@ const initialState = {
 
 const auth = handleActions(
   {
-    [CHANG_FIELD]: (state, { payload: { form, key, value } }) =>
+    [CHANGE_FIELD]: (state, { payload: { form, key, value } }) =>
       produce(state, (draft) => {
         draft[form][key] = value; //immer state.register(form).password(key) = value
       }),
