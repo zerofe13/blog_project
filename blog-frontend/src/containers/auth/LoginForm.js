@@ -51,6 +51,11 @@ const LoginForm = ({ history }) => {
     if (user) {
       //user 값 이 설정되있으면 홈화면으로 이동
       history.push('/');
+      try {
+        localStorage.setItem('user', JSON.stringify(user));
+      } catch (e) {
+        console.log('localStorage is not working');
+      }
     }
   }, [history, user]);
   return (

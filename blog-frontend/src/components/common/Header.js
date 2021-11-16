@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Responsive from './Responsive';
 import Button from './Button';
+import { Link } from 'react-router-dom';
 
 const HeaderBlack = styled.div`
   position: fixed;
@@ -29,16 +30,29 @@ const Wrapper = styled(Responsive)`
 const Spacer = styled.div`
   height: 4rem;
 `;
+const UserInfo = styled.div`
+  font-weight: 800;
+  margin-right: 1rem;
+`;
 
-const Header = () => {
+const Header = ({ user }) => {
   return (
     <>
       <HeaderBlack>
         <Wrapper>
-          <div className="logo">REATERS</div>
-          <div className="right">
-            <Button>로그인</Button>
-          </div>
+          <Link to="/" className="logo">
+            REATERS
+          </Link>
+          {user ? (
+            <div className="right">
+              <UserInfo>{user.username}</UserInfo>
+              <Button>로그아웃</Button>
+            </div>
+          ) : (
+            <div className="right">
+              <Button to="/login">로그인</Button>
+            </div>
+          )}
         </Wrapper>
       </HeaderBlack>
       <Spacer />
