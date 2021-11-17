@@ -4,7 +4,7 @@ import Responsive from './Responsive';
 import Button from './Button';
 import { Link } from 'react-router-dom';
 
-const HeaderBlack = styled.div`
+const HeaderBlock = styled.div`
   position: fixed;
   width: 100%;
   background: white;
@@ -38,7 +38,7 @@ const UserInfo = styled.div`
 const Header = ({ user, onLogout }) => {
   return (
     <>
-      <HeaderBlack>
+      <HeaderBlock>
         <Wrapper>
           <Link to="/" className="logo">
             REATERS
@@ -54,7 +54,7 @@ const Header = ({ user, onLogout }) => {
             </div>
           )}
         </Wrapper>
-      </HeaderBlack>
+      </HeaderBlock>
       <Spacer />
     </>
   );
