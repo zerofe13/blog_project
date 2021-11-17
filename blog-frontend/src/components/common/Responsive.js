@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const ResponsiveBlack = styled.div`
+const ResponsiveBlock = styled.div`
   padding-left: 1rem;
   padding-right: 1rem;
   width: 1024px;
@@ -17,7 +17,7 @@ const ResponsiveBlack = styled.div`
 
 const Responsive = ({ children, ...rest }) => {
   //style,className,onclick, 등의 props를 사용하술있도록 ...rest를 사용하여 전달
-  return <ResponsiveBlack {...rest}>{children}</ResponsiveBlack>;
+  return <ResponsiveBlock {...rest}>{children}</ResponsiveBlock>;
 };
 
 export default Responsive;
